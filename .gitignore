@@ -12,3 +12,11 @@ __pycache__/
 .DS_Store
 
 # VS Code
+
+# Generated model artifacts
+models/*.joblib
+models/*.pth
+models/*.pt
+
+# Keep the directory
+!models/.gitkeep
