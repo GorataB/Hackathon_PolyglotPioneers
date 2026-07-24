@@ -344,6 +344,11 @@ logs/
 
 ---
 
+# Classical/Statistical Model
+For the classical/statistical model, we use SARIMAX. The code is in the "Model_1_Statistical_SARIMAX" jupyter notebook. Before running this notebook, run the "Data Cleaning" notebook to clean and merge the relevant data. Replace the file paths with your own to run in your local computer. The human capital project data is also cleaned in the "Data Cleaning" notebook. However, it is not merged to the 4 main datasets and it is analyzed separately with external data.
+
+After cleaning the data, save the merged data as "predictions_data" to the Data_Clean folder. Then load this data in the "Model_1_Statistical_SARIMAX" notebook. Remember to replace the file paths with your own to run on your local computer. The steps for SARIMAX are clearly laid out in the notebook, from data exploration to diagnostic tests and forecasts. After creating the final forecasts, save the forecasted food price inflation data as "stats_model_predictions" to the Predictions folder.
+
 # 📈 Future Improvements
 
 Potential future extensions include:
