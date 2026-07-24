@@ -1,0 +1,27 @@
+# Core Data Science
+numpy>=1.26
+pandas>=2.2
+scikit-learn>=1.5
+scipy>=1.13
+
+# Deep Learning
+torch>=2.3
+torchvision>=0.18
+torchaudio>=2.3
+
+# Explainability
+captum>=0.7
+shap>=0.46
+
+# Visualisation
+matplotlib>=3.9
+plotly>=5.22
+
+# Utilities
+joblib>=1.4
+tqdm>=4.66
+
+# Jupyter
+jupyter
+ipykernel
+notebook
