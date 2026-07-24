@@ -61,10 +61,12 @@ from src.data.data_types import SequenceData
 from src.data.dataset import ForecastDataset
 from src.utils.visualization import plot_prediction_intervals
 
+
 from src.models.lstm_model import LSTMModel
 
 from src.utils.metrics import evaluate
 from src.utils.checkpoint import CheckpointManager
+from src.explainability.shap_explainer import SHAPExplainer
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -819,6 +821,28 @@ class Trainer:
             f"{np.corrcoef(predictions.flatten(), targets.flatten())[0,1]:.4f}"
         )
 
+        import pandas as pd
+
+        # Create predictions dataframe
+        predictions_df = pd.DataFrame({
+            "Actual": targets.flatten(),
+            "Predicted": predictions.flatten(),
+            "Error": targets.flatten() - predictions.flatten(),
+            "Absolute_Error": np.abs(targets.flatten() - predictions.flatten()),
+            "Lower_95_PI": lower_intervals.flatten(),
+            "Upper_95_PI": upper_intervals.flatten(),
+        })
+
+        # Create output directory if it doesn't exist
+        output_dir = Path("predictions")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Save CSV
+        output_file = output_dir / "lstm_predictions.csv"
+        predictions_df.to_csv(output_file, index=False)
+
+        logger.info(f"Predictions saved to {output_file}")
+
         metrics = evaluate(
             targets,
             predictions,
@@ -827,6 +851,43 @@ class Trainer:
         logger.info(
             f"Test metrics: {metrics}"
         )
+
+        # =====================================================
+        # SHAP Explainability
+        # =====================================================
+
+        try:
+            with torch.enable_grad():
+                background = self.sequence_data.X_train[:50]
+
+                explanation_samples = (
+                    self.sequence_data.X_test[:20]
+                )
+
+                explainer = SHAPExplainer(
+                    model=self.model,
+                    device=self.device,
+                )
+
+                shap_values = explainer.explain(
+                    background=background,
+                    samples=explanation_samples,
+                )
+
+                explainer.save_summary_plot(
+                    shap_values=shap_values,
+                    samples=explanation_samples,
+                    feature_names=self.sequence_data.feature_names,
+                )
+
+                logger.info(
+                    "SHAP summary plot saved."
+                )
+
+        except Exception as exc:
+            logger.warning(
+                f"Unable to generate SHAP explanations: {exc}"
+            )
 
         return metrics
 
