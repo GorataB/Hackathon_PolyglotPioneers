@@ -24,6 +24,7 @@ from __future__ import annotations
 from src.utils.correlation import correlation_report
 from src.utils.feature_importance import feature_importance_report
 from src.config.config import TARGET_COLUMN
+from src.models.uncertainty import monte_carlo_predict
 
 import sys
 import traceback

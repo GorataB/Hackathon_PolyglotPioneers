@@ -1866,3 +1866,318 @@ FileNotFoundError: Checkpoint not found: /Users/paulettamaunge/Documents/GitHub/
 2026-07-24 03:21:31 | INFO     | __main__ | ================================================================================
 2026-07-24 03:21:31 | INFO     | __main__ | FORECASTING PIPELINE COMPLETED SUCCESSFULLY
 2026-07-24 03:21:31 | INFO     | __main__ | ================================================================================
+2026-07-24 13:19:47 | INFO     | __main__ | ================================================================================
+2026-07-24 13:19:47 | INFO     | __main__ | FORECASTING PIPELINE STARTED
+2026-07-24 13:19:47 | INFO     | __main__ | ================================================================================
+2026-07-24 13:19:47 | INFO     | __main__ | Step 1/6 : Loading dataset
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Loading dataset...
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Dataset loaded successfully (276 rows × 10 columns)
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Validating dataset...
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | No missing values detected.
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Sorting by 'year_month'.
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Feature columns: ['FAO_23012', 'FAO_23013', 'BDI_std', 'monthly_return_bdi', 'Brent_USD_per_barrel', 'policy_rate']
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | ============================================================
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Dataset Summary
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | ============================================================
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Rows      : 276
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Columns   : 10
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Features  : 6
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | Target    : FAO_23014
+2026-07-24 13:19:47 | INFO     | src.data.data_loader | ============================================================
+2026-07-24 13:19:47 | INFO     | __main__ | Running persistence baseline...
+2026-07-24 13:19:47 | INFO     | __main__ | Running correlation analysis...
+2026-07-24 13:19:47 | INFO     | __main__ | Running feature importance analysis...
+2026-07-24 13:19:47 | INFO     | __main__ | Step 2/6 : Preprocessing dataset
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Splitting dataset chronologically...
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Train rows      : 193
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Validation rows : 41
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Test rows       : 42
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Fitting feature scaler on training data...
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Fitting target scaler on training data...
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Saving preprocessing artifacts...
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Metadata saved.
+2026-07-24 13:19:47 | INFO     | src.data.preprocessor | Preprocessing pipeline completed successfully.
+2026-07-24 13:19:47 | INFO     | __main__ | Step 3/6 : Building LSTM sequences
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Building LSTM sequence datasets...
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Creating sequences (window=12)...
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Generated 181 sequences.
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Sequence shape: (181, 12, 6)
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Creating sequences (window=12)...
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Generated 29 sequences.
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Sequence shape: (29, 12, 6)
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Creating sequences (window=12)...
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Generated 30 sequences.
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Sequence shape: (30, 12, 6)
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | y_train_seq min=-1.262985348701477, max=3.2605814933776855
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | y_val_seq min=-1.646776795387268, max=-0.7225300669670105
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | y_test_seq min=-1.1580467224121094, max=1.9002104997634888
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | y_val_seq NaNs=0, Infs=0
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Sequence generation completed successfully.
+2026-07-24 13:19:47 | INFO     | src.models.sequence_builder | Input size: 6
+2026-07-24 13:19:47 | INFO     | __main__ | Step 4/6 : Initialising trainer
+2026-07-24 13:19:47 | INFO     | src.models.trainer | Initialising trainer...
+2026-07-24 13:19:47 | WARNING  | src.models.trainer | MPS backend detected; falling back to CPU because it can produce unstable training results on this project.
+2026-07-24 13:19:47 | INFO     | src.models.trainer | Training device: cpu
+2026-07-24 13:19:47 | INFO     | src.models.trainer | SequenceData y_train: min=-1.262985348701477, max=3.2605814933776855
+2026-07-24 13:19:47 | INFO     | src.models.trainer | SequenceData y_validation: min=-1.646776795387268, max=-0.7225300669670105
+2026-07-24 13:19:47 | INFO     | src.models.trainer | SequenceData y_test: min=-1.1580467224121094, max=1.9002104997634888
+2026-07-24 13:19:47 | INFO     | src.data.dataset | Dataset created with 181 samples.
+2026-07-24 13:19:47 | INFO     | src.data.dataset | Dataset created with 29 samples.
+2026-07-24 13:19:47 | INFO     | src.data.dataset | Dataset created with 30 samples.
+2026-07-24 13:19:48 | INFO     | src.models.trainer | Trainer initialised successfully.
+2026-07-24 13:19:48 | INFO     | src.models.trainer | No previous checkpoint found.
+2026-07-24 13:19:48 | INFO     | __main__ | Step 5/6 : Training model
+2026-07-24 13:19:48 | INFO     | src.models.trainer | Starting training...
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:48 | INFO     | src.models.trainer | Epoch 1/100 | Train=0.999631 | Validation=1.566769 | MAE=1.212723 | RMSE=1.251706 | R²=-15.3898
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:48 | INFO     | src.models.trainer | Epoch 2/100 | Train=0.939047 | Validation=1.117448 | MAE=1.010104 | RMSE=1.057094 | R²=-10.6895
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:48 | INFO     | src.models.trainer | Epoch 3/100 | Train=0.813987 | Validation=0.363157 | MAE=0.513896 | RMSE=0.602625 | R²=-2.7989
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:19:48 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:48 | INFO     | src.models.trainer | Epoch 4/100 | Train=0.650130 | Validation=0.145912 | MAE=0.296376 | RMSE=0.381984 | R²=-0.5264
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 5/100 | Train=0.488799 | Validation=0.104028 | MAE=0.295049 | RMSE=0.322534 | R²=-0.0882
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 6/100 | Train=0.393179 | Validation=0.110461 | MAE=0.302054 | RMSE=0.332357 | R²=-0.1555
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 7/100 | Train=0.313066 | Validation=0.121477 | MAE=0.312282 | RMSE=0.348536 | R²=-0.2708
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 8/100 | Train=0.266199 | Validation=0.152946 | MAE=0.339105 | RMSE=0.391083 | R²=-0.5999
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 9/100 | Train=0.235420 | Validation=0.132461 | MAE=0.324118 | RMSE=0.363951 | R²=-0.3857
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 10/100 | Train=0.197433 | Validation=0.101636 | MAE=0.287737 | RMSE=0.318804 | R²=-0.0632
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 11/100 | Train=0.190342 | Validation=0.103177 | MAE=0.292318 | RMSE=0.321211 | R²=-0.0793
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 12/100 | Train=0.182064 | Validation=0.119989 | MAE=0.310610 | RMSE=0.346394 | R²=-0.2552
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 13/100 | Train=0.163326 | Validation=0.141172 | MAE=0.329347 | RMSE=0.375728 | R²=-0.4768
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 14/100 | Train=0.150057 | Validation=0.166457 | MAE=0.347968 | RMSE=0.407992 | R²=-0.7413
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 15/100 | Train=0.149597 | Validation=0.134016 | MAE=0.324466 | RMSE=0.366082 | R²=-0.4019
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Learning rate changed from 0.001000 to 0.000500
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 16/100 | Train=0.146779 | Validation=0.126666 | MAE=0.318260 | RMSE=0.355902 | R²=-0.3250
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 17/100 | Train=0.127863 | Validation=0.131199 | MAE=0.322840 | RMSE=0.362214 | R²=-0.3725
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 18/100 | Train=0.131026 | Validation=0.126885 | MAE=0.318853 | RMSE=0.356209 | R²=-0.3273
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 19/100 | Train=0.117518 | Validation=0.117477 | MAE=0.308721 | RMSE=0.342749 | R²=-0.2289
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 20/100 | Train=0.113971 | Validation=0.121078 | MAE=0.312873 | RMSE=0.347962 | R²=-0.2666
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 21/100 | Train=0.110973 | Validation=0.127956 | MAE=0.320426 | RMSE=0.357710 | R²=-0.3385
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Learning rate changed from 0.000500 to 0.000250
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 22/100 | Train=0.117589 | Validation=0.119587 | MAE=0.311272 | RMSE=0.345813 | R²=-0.2510
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 23/100 | Train=0.096477 | Validation=0.118210 | MAE=0.309754 | RMSE=0.343816 | R²=-0.2366
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 24/100 | Train=0.087362 | Validation=0.118694 | MAE=0.310268 | RMSE=0.344519 | R²=-0.2416
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Epoch 25/100 | Train=0.087465 | Validation=0.121654 | MAE=0.313879 | RMSE=0.348790 | R²=-0.2726
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Early stopping triggered.
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Training finished. Best epoch: 10
+2026-07-24 13:19:49 | INFO     | __main__ | Loading best model...
+2026-07-24 13:19:49 | INFO     | src.utils.checkpoint | Checkpoint loaded from /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Best model loaded.
+2026-07-24 13:19:49 | INFO     | __main__ | Step 6/6 : Evaluating model
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Mean shape: (30,)
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Std shape: (30,)
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Samples shape: (100, 30)
+2026-07-24 13:19:49 | INFO     | src.models.trainer | First prediction mean: -1.2666447162628174
+2026-07-24 13:19:49 | INFO     | src.models.trainer | First prediction std: 0.10998222976922989
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Predictions: min=-1.3010, max=-0.3366, mean=-0.8998
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Targets: min=-1.1580, max=1.9002, mean=0.4756
+2026-07-24 13:19:49 | INFO     | src.models.trainer | First 10 predictions: [-1.2666447 -1.267997  -1.267364  -1.2939708 -1.2607073 -1.2963299
+ -1.2759442 -1.2831458 -1.3010222 -1.277643 ]
+2026-07-24 13:19:49 | INFO     | src.models.trainer | First 10 targets: [-0.18336818 -0.2226519  -0.21740645 -0.1309263  -0.14575772 -0.05156028
+ -0.08376345 -0.14006779 -0.7410532  -1.1580467 ]
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Prediction correlation = 0.4248
+2026-07-24 13:19:49 | INFO     | src.models.trainer | Test metrics: {'mae': 1.3753835900376241, 'mse': 2.536529265236923, 'rmse': 1.5926485064937972, 'r2': -2.2238522107363625}
+2026-07-24 13:19:49 | INFO     | __main__ | ================================================================================
+2026-07-24 13:19:49 | INFO     | __main__ | FINAL TEST RESULTS
+2026-07-24 13:19:49 | INFO     | __main__ | ================================================================================
+2026-07-24 13:19:49 | INFO     | __main__ | MAE     : 1.375384
+2026-07-24 13:19:49 | INFO     | __main__ | MSE     : 2.536529
+2026-07-24 13:19:49 | INFO     | __main__ | RMSE    : 1.592649
+2026-07-24 13:19:49 | INFO     | __main__ | R2      : -2.223852
+2026-07-24 13:19:49 | INFO     | __main__ | ================================================================================
+2026-07-24 13:19:49 | INFO     | __main__ | FORECASTING PIPELINE COMPLETED SUCCESSFULLY
+2026-07-24 13:19:49 | INFO     | __main__ | ================================================================================
+2026-07-24 13:29:22 | INFO     | __main__ | ================================================================================
+2026-07-24 13:29:22 | INFO     | __main__ | FORECASTING PIPELINE STARTED
+2026-07-24 13:29:22 | INFO     | __main__ | ================================================================================
+2026-07-24 13:29:22 | INFO     | __main__ | Step 1/6 : Loading dataset
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Loading dataset...
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Dataset loaded successfully (276 rows × 10 columns)
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Validating dataset...
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | No missing values detected.
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Sorting by 'year_month'.
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Feature columns: ['FAO_23012', 'FAO_23013', 'BDI_std', 'monthly_return_bdi', 'Brent_USD_per_barrel', 'policy_rate']
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | ============================================================
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Dataset Summary
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | ============================================================
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Rows      : 276
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Columns   : 10
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Features  : 6
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | Target    : FAO_23014
+2026-07-24 13:29:22 | INFO     | src.data.data_loader | ============================================================
+2026-07-24 13:29:22 | INFO     | __main__ | Running persistence baseline...
+2026-07-24 13:29:22 | INFO     | __main__ | Running correlation analysis...
+2026-07-24 13:29:22 | INFO     | __main__ | Running feature importance analysis...
+2026-07-24 13:29:23 | INFO     | __main__ | Step 2/6 : Preprocessing dataset
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Splitting dataset chronologically...
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Train rows      : 193
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Validation rows : 41
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Test rows       : 42
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Fitting feature scaler on training data...
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Fitting target scaler on training data...
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Saving preprocessing artifacts...
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Metadata saved.
+2026-07-24 13:29:23 | INFO     | src.data.preprocessor | Preprocessing pipeline completed successfully.
+2026-07-24 13:29:23 | INFO     | __main__ | Step 3/6 : Building LSTM sequences
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Building LSTM sequence datasets...
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Creating sequences (window=12)...
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Generated 181 sequences.
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Sequence shape: (181, 12, 6)
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Creating sequences (window=12)...
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Generated 29 sequences.
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Sequence shape: (29, 12, 6)
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Creating sequences (window=12)...
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Generated 30 sequences.
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Sequence shape: (30, 12, 6)
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | y_train_seq min=-1.262985348701477, max=3.2605814933776855
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | y_val_seq min=-1.646776795387268, max=-0.7225300669670105
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | y_test_seq min=-1.1580467224121094, max=1.9002104997634888
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | y_val_seq NaNs=0, Infs=0
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Sequence generation completed successfully.
+2026-07-24 13:29:23 | INFO     | src.models.sequence_builder | Input size: 6
+2026-07-24 13:29:23 | INFO     | __main__ | Step 4/6 : Initialising trainer
+2026-07-24 13:29:23 | INFO     | src.models.trainer | Initialising trainer...
+2026-07-24 13:29:23 | WARNING  | src.models.trainer | MPS backend detected; falling back to CPU because it can produce unstable training results on this project.
+2026-07-24 13:29:23 | INFO     | src.models.trainer | Training device: cpu
+2026-07-24 13:29:23 | INFO     | src.models.trainer | SequenceData y_train: min=-1.262985348701477, max=3.2605814933776855
+2026-07-24 13:29:23 | INFO     | src.models.trainer | SequenceData y_validation: min=-1.646776795387268, max=-0.7225300669670105
+2026-07-24 13:29:23 | INFO     | src.models.trainer | SequenceData y_test: min=-1.1580467224121094, max=1.9002104997634888
+2026-07-24 13:29:23 | INFO     | src.data.dataset | Dataset created with 181 samples.
+2026-07-24 13:29:23 | INFO     | src.data.dataset | Dataset created with 29 samples.
+2026-07-24 13:29:23 | INFO     | src.data.dataset | Dataset created with 30 samples.
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Trainer initialised successfully.
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint loaded from /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Resuming from epoch 25
+2026-07-24 13:29:24 | INFO     | __main__ | Step 5/6 : Training model
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Starting training...
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 26/100 | Train=0.095771 | Validation=0.122072 | MAE=0.314376 | RMSE=0.349389 | R²=-0.2770
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 27/100 | Train=0.082483 | Validation=0.124634 | MAE=0.317260 | RMSE=0.353036 | R²=-0.3038
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Learning rate changed from 0.000250 to 0.000125
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 28/100 | Train=0.090502 | Validation=0.123908 | MAE=0.316491 | RMSE=0.352006 | R²=-0.2962
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 29/100 | Train=0.090037 | Validation=0.124646 | MAE=0.317315 | RMSE=0.353053 | R²=-0.3039
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 30/100 | Train=0.086760 | Validation=0.124950 | MAE=0.317642 | RMSE=0.353483 | R²=-0.3071
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 31/100 | Train=0.083499 | Validation=0.124835 | MAE=0.317526 | RMSE=0.353321 | R²=-0.3059
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 32/100 | Train=0.083012 | Validation=0.126919 | MAE=0.319750 | RMSE=0.356257 | R²=-0.3277
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 33/100 | Train=0.086172 | Validation=0.128000 | MAE=0.320861 | RMSE=0.357772 | R²=-0.3390
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Learning rate changed from 0.000125 to 0.000063
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 34/100 | Train=0.086377 | Validation=0.128384 | MAE=0.321232 | RMSE=0.358307 | R²=-0.3430
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 35/100 | Train=0.076534 | Validation=0.128134 | MAE=0.320978 | RMSE=0.357958 | R²=-0.3404
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 36/100 | Train=0.077617 | Validation=0.128715 | MAE=0.321558 | RMSE=0.358768 | R²=-0.3465
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 37/100 | Train=0.086567 | Validation=0.129222 | MAE=0.322064 | RMSE=0.359475 | R²=-0.3518
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 38/100 | Train=0.077044 | Validation=0.129343 | MAE=0.322183 | RMSE=0.359643 | R²=-0.3530
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 39/100 | Train=0.076730 | Validation=0.129406 | MAE=0.322245 | RMSE=0.359730 | R²=-0.3537
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Learning rate changed from 0.000063 to 0.000031
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/last_checkpoint.pth
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Training history saved to /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/training_history.json
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Epoch 40/100 | Train=0.079096 | Validation=0.129134 | MAE=0.321978 | RMSE=0.359352 | R²=-0.3509
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Early stopping triggered.
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Training finished. Best epoch: 1
+2026-07-24 13:29:24 | INFO     | __main__ | Loading best model...
+2026-07-24 13:29:24 | INFO     | src.utils.checkpoint | Checkpoint loaded from /Users/paulettamaunge/Documents/GitHub/Hackathon_PolyglotPioneers/models/checkpoints/best_lstm_model.pth
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Best model loaded.
+2026-07-24 13:29:24 | INFO     | __main__ | Step 6/6 : Evaluating model
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Mean shape: (30,)
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Std shape: (30,)
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Samples shape: (100, 30)
+2026-07-24 13:29:24 | INFO     | src.models.trainer | Prediction: -1.2553
+2026-07-24 13:29:24 | INFO     | src.models.trainer | 95% Confidence Interval: [-1.2772, -1.2334]
+2026-07-24 13:29:24 | INFO     | src.models.trainer | 95% Prediction Interval: [-1.4745, -1.0361]
+2026-07-24 13:29:26 | INFO     | src.models.trainer | Predictions: min=-1.2990, max=-0.3404, mean=-0.8988
+2026-07-24 13:29:26 | INFO     | src.models.trainer | Targets: min=-1.1580, max=1.9002, mean=0.4756
+2026-07-24 13:29:26 | INFO     | src.models.trainer | First 10 predictions: [-1.2553192 -1.251548  -1.2522293 -1.2342536 -1.2631602 -1.2759279
+ -1.2744327 -1.2953671 -1.2746289 -1.292455 ]
+2026-07-24 13:29:26 | INFO     | src.models.trainer | First 10 targets: [-0.18336818 -0.2226519  -0.21740645 -0.1309263  -0.14575772 -0.05156028
+ -0.08376345 -0.14006779 -0.7410532  -1.1580467 ]
+2026-07-24 13:29:26 | INFO     | src.models.trainer | Prediction correlation = 0.4227
+2026-07-24 13:29:26 | INFO     | src.models.trainer | Test metrics: {'mae': 1.3744056665649016, 'mse': 2.5352352121466826, 'rmse': 1.5922421964470992, 'r2': -2.222207508278971}
+2026-07-24 13:29:26 | INFO     | __main__ | ================================================================================
+2026-07-24 13:29:26 | INFO     | __main__ | FINAL TEST RESULTS
+2026-07-24 13:29:26 | INFO     | __main__ | ================================================================================
+2026-07-24 13:29:26 | INFO     | __main__ | MAE     : 1.374406
+2026-07-24 13:29:26 | INFO     | __main__ | MSE     : 2.535235
+2026-07-24 13:29:26 | INFO     | __main__ | RMSE    : 1.592242
+2026-07-24 13:29:26 | INFO     | __main__ | R2      : -2.222208
+2026-07-24 13:29:26 | INFO     | __main__ | ================================================================================
+2026-07-24 13:29:26 | INFO     | __main__ | FORECASTING PIPELINE COMPLETED SUCCESSFULLY
+2026-07-24 13:29:26 | INFO     | __main__ | ================================================================================

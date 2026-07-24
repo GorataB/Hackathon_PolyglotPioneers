@@ -32,6 +32,11 @@ from torch.optim import Adam
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
+from src.models.uncertainty import (
+    confidence_interval,
+    monte_carlo_predict,
+    prediction_interval,
+)
 
 from tqdm import tqdm
 
@@ -54,6 +59,7 @@ from src.config.config import (
 
 from src.data.data_types import SequenceData
 from src.data.dataset import ForecastDataset
+from src.utils.visualization import plot_prediction_intervals
 
 from src.models.lstm_model import LSTMModel
 
@@ -718,17 +724,49 @@ class Trainer:
 
         predictions = []
         targets = []
+        lower_intervals = []
+        upper_intervals = []
 
         for inputs, labels in self.test_loader:
 
             inputs = inputs.to(self.device)
             labels = labels.to(self.device)
 
-            outputs = self.model(inputs)
-
-            predictions.append(
-                outputs.cpu().numpy()
+            mean, std, samples = monte_carlo_predict(
+                self.model,
+                inputs,
+                n_samples=100,
             )
+
+            lower_ci, upper_ci = confidence_interval(
+                mean,
+                std,
+                n_samples=100,
+            )
+
+            lower_pi, upper_pi = prediction_interval(
+                mean,
+                std,
+            )
+
+            if len(predictions) == 0:
+                logger.info(f"Mean shape: {mean.shape}")
+                logger.info(f"Std shape: {std.shape}")
+                logger.info(f"Samples shape: {samples.shape}")
+
+                logger.info(
+                    f"Prediction: {mean[0]:.4f}"
+                )
+                logger.info(
+                    f"95% Confidence Interval: [{lower_ci[0]:.4f}, {upper_ci[0]:.4f}]"
+                )
+                logger.info(
+                    f"95% Prediction Interval: [{lower_pi[0]:.4f}, {upper_pi[0]:.4f}]"
+                )
+
+            predictions.append(mean)
+            lower_intervals.append(lower_pi)
+            upper_intervals.append(upper_pi)
 
             targets.append(
                 labels.cpu().numpy()
@@ -742,6 +780,23 @@ class Trainer:
         targets = np.concatenate(
             targets,
             axis=0,
+        )
+
+        lower_intervals = np.concatenate(
+            lower_intervals,
+            axis=0,
+        )
+
+        upper_intervals = np.concatenate(
+            upper_intervals,
+            axis=0,
+        )
+
+        plot_prediction_intervals(
+            targets=targets.flatten(),
+            predictions=predictions.flatten(),
+            lower_interval=lower_intervals.flatten(),
+            upper_interval=upper_intervals.flatten(),
         )
 
         logger.info(
