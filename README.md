@@ -201,7 +201,7 @@ After determing the ARIMA order in the later stages, the model equation used to 
 
 <br><br>
 
-<img src="Seasonality_Dummy_Term.png" width="750">
+<img src="Images/Seasonality_Dummy_Term.png" width="750">
 
 </p>
 
