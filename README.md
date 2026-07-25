@@ -189,6 +189,22 @@ SARIMAX provides an interpretable baseline for evaluating forecasting performanc
 
 The code for the SARIMAX model can be found in the Model_1_Classical Jupyter notebook. Before running this notebook, clean and merge the datasets using the Data Cleaning notebook. Replace the file paths with your own to run the code in your local computer. The food price inflation, Baltic Dry Index, Brent Crude Oil prices and policy rate datasets are cleaned and merged together. However, the Human Capital Project dataset is not merged to these 4 datasets and it is instead merged with external data and analysed separately. After merging the 4 datasets, save the final data as a dataset called "prediction_data" to the Data_Clean folder. After this step, load the "prediction_data.csv" file in the "Model_1_Classical" notebook and start the analysis. Remember to replace the file paths with your own to run the code in your local computer. 
 
+After determing the ARIMA order in the later stages, the model equation used to forecast the fod price inflation is as follows. Even though the final ARIMA order is ARIMA(0, 1, 2), we do not difference the dependent variable as SARIMAX handles differencing internally:
+
+<p align="center">
+
+<img src="Images/ARIMAX_equation.png" width="750">
+
+<br><br>
+
+<img src="Images/error_term.png" width="750">
+
+<br><br>
+
+<img src="Seasonality_Dummy_Term.png" width="750">
+
+</p>
+
 The pipeline for processing and analysing data for the SARIMAX process is as follows:
 
 ```text
@@ -245,8 +261,6 @@ Evaluate model (RMSE, MAE, sMAPE and R-squared)
         ▼
 Export predictions
 ```
-
-
 ---
 
 ## Deep Learning Model — LSTM
