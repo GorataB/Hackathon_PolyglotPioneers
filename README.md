@@ -167,8 +167,6 @@ FAO_23014
 
 using the following predictor variables:
 
-- FAO_23012
-- FAO_23013
 - Brent_USD_per_barrel
 - policy_rate
 - BDI_std
@@ -180,9 +178,9 @@ using the following predictor variables:
 
 ## Classical Machine Learning
 
-A classical forecasting model serves as the benchmark for comparison with the deep learning approach.
+A classical forecasting model (SARIMAX) serves as the benchmark for comparison with the deep learning approach.
 
-The objective is to evaluate whether deep learning provides additional predictive value over more traditional machine learning methods.
+The objective is to evaluate whether deep learning provides additional predictive value over more traditional statistical learning methods.
 
 ---
 
