@@ -26,6 +26,10 @@ class ProcessedData:
     y_validation: np.ndarray
     y_test: np.ndarray
 
+    train_dates: np.ndarray
+    validation_dates: np.ndarray
+    test_dates: np.ndarray
+
     feature_names: list[str]
 
 
@@ -43,6 +47,10 @@ class SequenceData:
 
     X_test: np.ndarray
     y_test: np.ndarray
+
+    train_dates: np.ndarray
+    validation_dates: np.ndarray
+    test_dates: np.ndarray
 
     feature_names: list[str]
 

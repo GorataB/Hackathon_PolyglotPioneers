@@ -1,4 +1,4 @@
-# 🇧🇼 Economic Intelligence Framework for Food Inflation Forecasting
+# 🇧🇼 Economic Intelligence Framework for Food Inflation Forecasting in Botswana
 
 > **Deep Learning IndabaX Botswana 2026 Hackathon**  
 > Repository for the **Polyglot Pioneers** team.
@@ -16,93 +16,76 @@
 <p align="center">
 
 ![Deep Learning](https://img.shields.io/badge/Deep%20Learning-LSTM-purple?style=for-the-badge)
+![Statistical Model](https://img.shields.io/badge/Statistical-SARIMAX-blue?style=for-the-badge)
 ![Explainable AI](https://img.shields.io/badge/XAI-SHAP-orange?style=for-the-badge)
 ![Uncertainty](https://img.shields.io/badge/Monte%20Carlo-Dropout-red?style=for-the-badge)
 ![Forecasting](https://img.shields.io/badge/Forecasting-Time%20Series-00599C?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Hackathon%20Project-success?style=for-the-badge)
-
-</p>
-
-<p align="center">
-
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen?style=for-the-badge)
 
 </p>
 
 ---
 
-## 🚀 Highlights
+# 📖 Project Overview
 
-- 🇧🇼 Botswana-focused Food Inflation Forecasting
-- 📈 Multivariate Time-Series Forecasting
-- 🤖 Classical Machine Learning Baseline
-- 🧠 Deep Learning using LSTM Networks
-- 📉 Monte Carlo Dropout for Predictive Uncertainty
+The **Economic Intelligence Framework** is an end-to-end forecasting system developed for the **Deep Learning IndabaX Botswana 2026 Hackathon**.
+
+The framework integrates heterogeneous macroeconomic datasets into a unified analytical pipeline that forecasts Botswana's monthly food inflation using both a **Seasonal AutoRegressive Integrated Moving Average with eXogenous Variables (SARIMAX)** model and a **Long Short-Term Memory (LSTM)** neural network.
+
+Beyond forecasting, the framework incorporates:
+
+- 📊 Cross-dataset feature engineering
+- 📈 Time-series forecasting
+- 🔍 Explainable Artificial Intelligence (SHAP)
+- 📉 Predictive uncertainty using Monte Carlo Dropout
+- 🇧🇼 Decision-support for Botswana's food inflation
+
+The project demonstrates how classical statistical modelling and deep learning can be combined within a transparent, reproducible Economic Intelligence Framework.
+
+---
+
+# 🚀 Key Features
+
+- 🇧🇼 Botswana-focused food inflation forecasting
+- 📊 Multi-source economic data integration
+- 📈 Classical statistical forecasting using SARIMAX
+- 🧠 Deep learning forecasting using LSTM
 - 🔍 Explainable AI using SHAP
-- 🌍 Economic Intelligence Framework
-- 📊 Decision-Support Focused
+- 📉 Monte Carlo Dropout uncertainty estimation
+- 📦 Automated preprocessing pipeline
+- 🔄 Reproducible forecasting workflow
+- 📁 Competition-ready prediction generation
 
 ---
 
-# 📖 Overview
+# 🏗 System Architecture
 
-Food inflation is influenced by complex interactions between global commodity prices, transportation costs, domestic monetary policy, and broader macroeconomic conditions. Reliable forecasting enables governments, policymakers, researchers, and businesses to make proactive decisions regarding food security, inflation management, and economic planning.
-
-This project presents an **Economic Intelligence Framework** that integrates heterogeneous macroeconomic datasets into a unified forecasting pipeline capable of:
-
-- Forecasting food inflation
-- Comparing classical and deep learning approaches
-- Quantifying predictive uncertainty
-- Explaining model predictions
-- Supporting evidence-based economic decision-making
-
----
-
-# 🎯 Project Objectives
-
-The project aims to:
-
-- Integrate multiple macroeconomic datasets into a unified analytical dataset.
-- Develop forecasting models for food inflation.
-- Compare classical machine learning and deep learning performance.
-- Quantify predictive uncertainty using Monte Carlo Dropout.
-- Improve model transparency through SHAP Explainability.
-- Build a reusable Economic Intelligence Framework for future research and policy analysis.
-
----
-
-# 🏗️ System Architecture
-
-```
-                    External Economic Data
-                              │
-                              ▼
-                    Data Integration Layer
-                              │
-                              ▼
-                  Data Cleaning & Validation
-                              │
-                              ▼
-                    Feature Engineering
-                              │
-                              ▼
-                   Forecasting Models
-                ┌─────────────────────────┐
-                │                         │
-                ▼                         ▼
-     Classical Machine Learning      LSTM Network
-                │                         │
-                └──────────┬──────────────┘
-                           ▼
-               Monte Carlo Dropout
-                           │
-                           ▼
-                SHAP Explainability
-                           │
-                           ▼
-              Economic Intelligence Outputs
+```text
+External Economic Datasets
+        │
+        ▼
+Data Integration
+        │
+        ▼
+Data Cleaning & Validation
+        │
+        ▼
+Feature Engineering
+        │
+        ▼
+Chronological Train / Validation / Test Split
+        │
+ ┌──────┴────────┐
+ ▼               ▼
+SARIMAX        LSTM
+ │               │
+ ▼               ▼
+Forecasts   Monte Carlo Dropout
+                  │
+                  ▼
+             SHAP Explainability
+                  │
+                  ▼
+     Economic Intelligence Outputs
 ```
 
 ---
@@ -112,31 +95,25 @@ The project aims to:
 ```text
 .
 ├── Data_Raw/
-│   ├── 01_baltic_dry_index_daily.csv
-│   ├── 02_brent_crude_monthly.csv
-│   ├── 03_botswana_policy_rate.csv
-│   ├── 04_fao_botswana_prices.csv
-│   └── 05_human_capital_project.csv
-│
 ├── Data_Clean/
-│   └── prediction_data.csv
-│
 ├── notebooks/
-│
 ├── src/
+│   ├── config/
 │   ├── data/
-│   ├── models/
 │   ├── explainability/
+│   ├── features/
+│   ├── models/
+│   ├── scenarios/
 │   └── utils/
 │
 ├── models/
 │   ├── checkpoints/
-│   └── explainability/
+│   ├── explainability/
+│   ├── figures/
+│   └── training_history.json
 │
-├── predictions/
-│
+├── Predictions/
 ├── logs/
-│
 ├── README.md
 └── requirements.txt
 ```
@@ -145,116 +122,147 @@ The project aims to:
 
 # 📊 Datasets
 
-The framework integrates multiple macroeconomic datasets to capture factors influencing food inflation.
+The forecasting framework integrates five independent economic datasets.
 
-| Dataset | Description |
-|----------|-------------|
-| FAO Food Price Index | Food commodity prices |
-| Baltic Dry Index | Global shipping costs |
-| Brent Crude Oil | International energy prices |
-| Botswana Policy Rate | Monetary policy indicator |
-| Human Capital Project | Socioeconomic reference dataset |
+| Dataset | Purpose |
+|----------|---------|
+| FAO Food Price Indices | Food price indicators and forecasting target |
+| Baltic Dry Index | International shipping market conditions |
+| Brent Crude Oil Prices | Global energy markets |
+| Botswana Policy Rate | Domestic monetary policy |
+| Human Capital Project | Long-term socioeconomic analysis |
+
+The Human Capital Project dataset is analysed separately from the forecasting models because its annual reporting frequency is incompatible with monthly forecasting.
+
+---
+
+# ⚙️ Feature Engineering
+
+The forecasting pipeline performs extensive feature engineering before model training.
+
+Major stages include:
+
+- Cross-dataset integration
+- Temporal harmonisation
+- Daily-to-monthly Baltic Dry Index aggregation
+- Chronological data validation
+- Chronological train/validation/test splitting
+- Feature scaling
+- Sliding-window sequence generation
+- Prediction dataset generation
+
+The final forecasting models use four engineered predictor variables:
+
+- **BDI_std**
+- **monthly_return_bdi**
+- **Brent_USD_per_barrel**
+- **policy_rate**
+
+These variables capture complementary aspects of international trade, transportation costs, energy markets and domestic monetary policy.
 
 ---
 
 # 🎯 Prediction Target
 
-The forecasting task predicts:
+The forecasting target is
 
 ```text
 FAO_23014
 ```
 
-using the following predictor variables:
-
-- Brent_USD_per_barrel
-- policy_rate
-- BDI_std
-- monthly_return_bdi
+representing Botswana's monthly Food Price Index.
 
 ---
 
 # 🤖 Forecasting Models
 
-## Classical Statistical Model
+## Classical Statistical Model — SARIMAX
 
-A classical forecasting model (SARIMAX) serves as the benchmark for comparison with the deep learning approach.
+The statistical benchmark model captures:
 
-The objective is to evaluate whether deep learning provides additional predictive value over more traditional statistical learning methods.
+- Seasonal patterns
+- Temporal autocorrelation
+- Trend
+- Exogenous macroeconomic variables
+
+SARIMAX provides an interpretable baseline for evaluating forecasting performance.
 
 ---
 
-## Deep Learning (LSTM)
+## Deep Learning Model — LSTM
 
-The deep learning component employs a **Long Short-Term Memory (LSTM)** neural network designed for multivariate time-series forecasting.
+The LSTM model learns temporal dependencies directly from sequential observations.
 
-### Model Architecture
+### Architecture
 
 | Parameter | Value |
 |-----------|------:|
-| Input Features | 6 |
+| Input Features | 4 |
 | Sequence Length | 12 Months |
 | Hidden Units | 64 |
 | LSTM Layers | 2 |
 | Dropout | 0.20 |
 
----
+Training includes:
 
-# 📉 Uncertainty Quantification
-
-Rather than producing only point forecasts, the framework estimates predictive uncertainty using **Monte Carlo Dropout**.
-
-Generated outputs include:
-
-- Predictive Mean
-- Predictive Standard Deviation
-- 95% Confidence Intervals
-- 95% Prediction Intervals
-
-This provides additional confidence information for economic decision-makers.
+- Early Stopping
+- Learning Rate Scheduling
+- Checkpoint Saving
+- Monte Carlo Dropout
 
 ---
 
 # 🔍 Explainable AI
 
-Model transparency is achieved using **SHAP (SHapley Additive exPlanations)**.
+Model interpretability is provided through **SHAP (SHapley Additive exPlanations)**.
 
-The explainability module provides:
+Generated explainability outputs include:
 
 - Global feature importance
 - Feature contribution analysis
 - SHAP summary plots
-- Improved model interpretability
+
+---
+
+# 📉 Uncertainty Quantification
+
+Prediction uncertainty is estimated using **Monte Carlo Dropout**.
+
+Outputs include:
+
+- Predictive mean
+- Predictive standard deviation
+- 95% confidence intervals
+- 95% prediction intervals
 
 ---
 
 # ⚙️ Training Pipeline
 
-The forecasting workflow consists of:
+The end-to-end forecasting pipeline performs:
 
-- Data Integration
-- Data Validation
-- Feature Engineering
-- Feature Scaling
-- Chronological Data Splitting
-- Sequence Generation
-- LSTM Training
-- Checkpoint Saving
-- Early Stopping
-- Learning Rate Scheduling
-- Monte Carlo Dropout
-- SHAP Explainability
-- Forecast Generation
+1. Data loading
+2. Dataset validation
+3. Feature engineering
+4. Feature scaling
+5. Chronological data splitting
+6. Sequence generation
+7. LSTM training
+8. Model evaluation
+9. Monte Carlo Dropout
+10. SHAP explainability
+11. Prediction generation
 
 ---
 
-# 🛠️ Built With
+# 🛠 Technologies
 
 | Technology | Purpose |
 |------------|---------|
 | Python | Core programming language |
 | PyTorch | Deep learning |
-| Scikit-learn | Classical machine learning & preprocessing |
+| Statsmodels | SARIMAX forecasting |
+| Scikit-learn | Preprocessing & evaluation |
 | Pandas | Data manipulation |
 | NumPy | Numerical computing |
 | Matplotlib | Visualisation |
@@ -264,104 +272,141 @@ The forecasting workflow consists of:
 
 # 📦 Installation
 
-Clone the repository.
-
 ```bash
-git clone https://github.com/<organisation>/<repository>.git
+git clone https://github.com/GorataB/Hackathon_PolyglotPioneers.git
 
-cd <repository>
-```
+cd Hackathon_PolyglotPioneers
 
-Create a virtual environment.
-
-```bash
 python -m venv .venv
-```
 
-Activate it.
-
-### Windows
-
-```bash
+# Windows
 .venv\Scripts\activate
-```
 
-### macOS / Linux
-
-```bash
+# macOS / Linux
 source .venv/bin/activate
-```
 
-Install dependencies.
-
-```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-# ▶️ Running the Project
-
-Train the forecasting model.
+# ▶️ Running the Pipeline
 
 ```bash
-python src/models/trainer.py
+python -m src.deep_learning_train
 ```
 
-Generate predictions.
+---
+
+# 🔄 Training From Scratch
+
+If previous checkpoints exist, delete them before retraining.
+
+Linux / macOS
 
 ```bash
-python src/models/predict.py
+rm models/checkpoints/*.pth
 ```
 
-Run SHAP explainability.
+Windows PowerShell
+
+```powershell
+Remove-Item models\checkpoints\*.pth
+```
+
+Then run
 
 ```bash
-python src/explainability/shap_analysis.py
+python -m src.deep_learning_train
 ```
 
 ---
 
 # 📊 Generated Outputs
 
-Running the pipeline produces outputs similar to:
-
 ```text
 models/
-    checkpoints/
+│
+├── checkpoints/
+├── explainability/
+│     └── shap_summary.png
+│
+├── figures/
+│     ├── uncertainty_forecast.png
+│     ├── forecast_vs_actual.png
+│     └── training_loss.png
+│
+└── training_history.json
 
-predictions/
-    lstm_predictions.csv
-
-models/explainability/
-    shap_summary.png
+Predictions/
+├── predictions.csv
+├── lstm_predictions.csv
+└── stats_model_predictions.csv
 
 logs/
-    forecasting_pipeline.log
+└── forecasting_pipeline.log
 ```
 
 ---
 
-# Classical/Statistical Model
-For the classical/statistical model, we use SARIMAX. The code is in the "Model_1_Classical" jupyter notebook. Before running this notebook, run the "Data Cleaning" notebook to clean and merge the relevant data. Replace the file paths with your own to run in your local computer. The human capital project data is also cleaned in the "Data Cleaning" notebook. However, it is not merged to the 4 main datasets and it is analyzed separately with external data.
+# 📊 Results and Visualisations
 
-After cleaning the data, save the merged data as "predictions_data" to the Data_Clean folder. Then load this data in the "Model_1_Classical" notebook. Remember to replace the file paths with your own to run on your local computer. The steps for SARIMAX are clearly laid out in the notebook, from data exploration to diagnostic tests and forecasts. 
+The forecasting pipeline automatically generates several visual outputs that support model evaluation, explainability, and uncertainty analysis.
 
-We find that the classical model outperforms the deep learning model. Therefore, after creating the final forecasts, save the forecasted food price inflation data as "best_model_predictions.csv" to the Predictions folder.
+| Output | Description |
+|---------|-------------|
+| 📈 **uncertainty_forecast.png** | Forecasts with 95% confidence and prediction intervals generated using Monte Carlo Dropout. |
+| 📊 **shap_summary.png** | SHAP feature importance plot showing each predictor's contribution to the LSTM forecasts. |
+| 📉 **forecast_vs_actual.png** | Comparison between observed and predicted food inflation values on the test dataset. |
+| 🧠 **training_loss.png** | Training and validation loss curves illustrating model convergence and early stopping behaviour. |
 
-# 📈 Future Improvements
+<p align="center">
 
-Potential future extensions include:
+<img src="models/figures/uncertainty_forecast.png" width="750">
 
-- Transformer-based forecasting
-- Temporal Convolutional Networks (TCNs)
+<br><br>
+
+<img src="models/explainability/shap_summary.png" width="750">
+
+<br><br>
+
+<img src="models/figures/forecast_vs_actual.png" width="750">
+
+<br><br>
+
+<img src="models/figures/training_loss.png" width="750">
+
+</p>
+
+---
+
+# 🔄 Reproducibility
+
+The forecasting framework has been designed for reproducible experimentation.
+
+Key reproducibility features include:
+
+- Deterministic preprocessing
+- Chronological train/validation/test split
+- Saved preprocessing scalers
+- Saved checkpoints
+- Automated prediction generation
+- Logging throughout the pipeline
+- Modular project structure
+
+---
+
+# 📈 Future Work
+
+Potential future improvements include:
+
+- Temporal Fusion Transformers
 - GRU architectures
+- Temporal Convolutional Networks
 - Additional macroeconomic indicators
-- Interactive dashboards
 - Policy scenario simulation
+- Interactive dashboard
 - Real-time forecasting
-- Automated data ingestion
-- Web-based decision-support platform
 
 ---
 
@@ -371,59 +416,28 @@ Potential future extensions include:
 
 **Deep Learning IndabaX Botswana 2026 Hackathon**
 
-| Role | Contributor |
-|------|-------------|
-| Classical Machine Learning | *To be updated* |
-| Deep Learning | *To be updated* |
-| Data Engineering | *To be updated* |
-| Explainable AI | *To be updated* |
-| Documentation | *To be updated* |
-
 ---
 
-# 🤝 Contributing
+# 🙏 Acknowledgements
 
-This repository was developed as part of the **Deep Learning IndabaX Botswana 2026 Hackathon**.
-
-Contributions, improvements, and suggestions are welcome.
-
-If you would like to contribute:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push the branch
-5. Open a Pull Request
+- Deep Learning IndabaX Botswana
+- Startup Labs
+- VenturePulse
+- Food and Agriculture Organization (FAO)
+- Bank of Botswana
+- Baltic Exchange
+- World Bank Human Capital Project
+- Open-source Python community
 
 ---
 
 # 📄 License
 
-This project is released under the **MIT License**.
-
-See the `LICENSE` file for details.
-
----
-
-# 🙏 Acknowledgements
-
-This project would not have been possible without the datasets and support provided by:
-
-- Deep Learning IndabaX Botswana
-- Food and Agriculture Organization (FAO)
-- Bank of Botswana
-- Baltic Exchange
-- World Bank Human Capital Project
-- The open-source Python community
-
----
-
-# 📬 Contact
-
-For questions, suggestions, or collaboration, please contact the **Polyglot Pioneers** team through GitHub.
+This project is released under the MIT License.
 
 ---
 
 <p align="center">
-Built with ❤️ by <strong>Polyglot Pioneers</strong> for the <strong>Deep Learning IndabaX Botswana 2026 Hackathon</strong>.
+Built with ❤️ by <strong>Polyglot Pioneers</strong><br>
+for the <strong>Deep Learning IndabaX Botswana 2026 Hackathon</strong>
 </p>

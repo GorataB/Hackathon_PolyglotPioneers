@@ -153,9 +153,22 @@ class DataLoader:
     # FEATURE DISCOVERY
     # ----------------------------------------------------
 
+        # ----------------------------------------------------
+    # FEATURE DISCOVERY
+    # ----------------------------------------------------
+
     def discover_features(self):
         """
         Automatically determine model input features.
+
+        Excludes:
+        - date columns
+        - non-feature columns
+        - target column
+        - FAO predictor columns
+
+        This ensures the LSTM uses the same exogenous variables
+        as the ARIMAX model for a fair comparison.
         """
 
         if self.data is None:
@@ -165,6 +178,7 @@ class DataLoader:
             set(DATE_COLUMNS)
             | set(NON_FEATURE_COLUMNS)
             | {TARGET_COLUMN}
+            | {"FAO_23012", "FAO_23013"}
         )
 
         self.feature_columns = [
@@ -178,8 +192,8 @@ class DataLoader:
         ]
 
         logger.info(
-    f"Feature columns: {self.feature_columns}"
-)
+            f"Feature columns: {self.feature_columns}"
+        )
 
         return self.feature_columns
 

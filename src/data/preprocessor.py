@@ -20,6 +20,8 @@ Author: Polyglot Pioneers
 """
 
 from __future__ import annotations
+
+from matplotlib import dates
 from src.data.data_types import ProcessedData
 
 import json
@@ -148,7 +150,7 @@ class Preprocessor:
             train_df[[TARGET_COLUMN]]
         )
 
-    # --------------------------------------------------------------
+    #    # --------------------------------------------------------------
 
     def transform(
         self,
@@ -167,13 +169,15 @@ class Preprocessor:
             dataframe[[TARGET_COLUMN]]
         ).flatten()
 
+        dates = dataframe["year_month"].to_numpy()
+
         return (
             X.astype(np.float32),
             y.astype(np.float32),
+            dates,
         )
 
     # --------------------------------------------------------------
-
     def save_artifacts(
         self,
         feature_columns,
@@ -273,17 +277,17 @@ class Preprocessor:
             feature_columns,
         )
 
-        X_train, y_train = self.transform(
+        X_train, y_train, train_dates = self.transform(
             train_df,
             feature_columns,
         )
 
-        X_validation, y_validation = self.transform(
+        X_validation, y_validation, validation_dates = self.transform(
             validation_df,
             feature_columns,
         )
 
-        X_test, y_test = self.transform(
+        X_test, y_test, test_dates = self.transform(
             test_df,
             feature_columns,
         )
@@ -296,9 +300,15 @@ class Preprocessor:
             X_train=X_train,
             X_validation=X_validation,
             X_test=X_test,
+
             y_train=y_train,
             y_validation=y_validation,
             y_test=y_test,
+
+            train_dates=train_dates,
+            validation_dates=validation_dates,
+            test_dates=test_dates,
+
             feature_names=feature_columns,
         )
 

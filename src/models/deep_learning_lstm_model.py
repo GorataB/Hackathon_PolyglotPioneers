@@ -1,5 +1,5 @@
 """
-lstm_model.py
+deep_learning_lstm_model.py
 
 Defines the LSTM forecasting model.
 

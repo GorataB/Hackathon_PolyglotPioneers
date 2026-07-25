@@ -1,5 +1,5 @@
 """
-train.py
+deep_learning_train.py
 
 Entry point for the forecasting pipeline.
 
@@ -42,8 +42,7 @@ from src.config.config import TARGET_COLUMN
 from src.data.data_loader import DataLoader
 from src.data.preprocessor import Preprocessor
 from src.models.sequence_builder import SequenceBuilder
-from src.models.trainer import Trainer
-
+from src.models.deep_learning_trainer import Trainer
 # NEW
 from src.models.baseline import persistence_baseline
 

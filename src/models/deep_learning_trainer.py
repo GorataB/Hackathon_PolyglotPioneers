@@ -1,5 +1,5 @@
 """
-trainer.py
+deep_learning_trainer.py
 
 Production trainer for the LSTM forecasting model.
 
@@ -62,8 +62,7 @@ from src.data.dataset import ForecastDataset
 from src.utils.visualization import plot_prediction_intervals
 
 
-from src.models.lstm_model import LSTMModel
-
+from src.models.deep_learning_lstm_model import LSTMModel
 from src.utils.metrics import evaluate
 from src.utils.checkpoint import CheckpointManager
 from src.explainability.shap_explainer import SHAPExplainer
@@ -837,11 +836,30 @@ class Trainer:
         output_dir = Path("predictions")
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Save CSV
+                # Save CSV
         output_file = output_dir / "lstm_predictions.csv"
         predictions_df.to_csv(output_file, index=False)
 
-        logger.info(f"Predictions saved to {output_file}")
+        competition_df = pd.DataFrame(
+            {
+                "year_month": self.sequence_data.test_dates,
+                "forecast": predictions.flatten(),
+            }
+        )
+
+        competition_df.to_csv(
+            output_dir / "predictions.csv",
+            index=False,
+        )
+
+        logger.info(
+            f"Competition predictions saved to {output_dir / 'predictions.csv'}"
+        )
+
+        logger.info(
+            f"Predictions saved to {output_file}"
+        )
+        
 
         metrics = evaluate(
             targets,
