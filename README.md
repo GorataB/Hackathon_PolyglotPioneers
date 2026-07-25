@@ -189,6 +189,64 @@ SARIMAX provides an interpretable baseline for evaluating forecasting performanc
 
 The code for the SARIMAX model can be found in the Model_1_Classical Jupyter notebook. Before running this notebook, clean and merge the datasets using the Data Cleaning notebook. Replace the file paths with your own to run the code in your local computer. The food price inflation, Baltic Dry Index, Brent Crude Oil prices and policy rate datasets are cleaned and merged together. However, the Human Capital Project dataset is not merged to these 4 datasets and it is instead merged with external data and analysed separately. After merging the 4 datasets, save the final data as a dataset called "prediction_data" to the Data_Clean folder. After this step, load the "prediction_data.csv" file in the "Model_1_Classical" notebook and start the analysis. Remember to replace the file paths with your own to run the code in your local computer. 
 
+The pipeline for processing and analysing data for the SARIMAX process is as follows:
+
+```text
+Data Cleaning and Inspection
+        │
+        ▼
+Exploratory plots (time series and lowess plots)
+        │
+        ▼
+Test for seasonality and structural breaks
+        │
+        ▼
+Creation of seasonality and structural break dummy variable
+        │
+        ▼
+Test for stationarity
+        │
+        ▼
+Pearson correlation test
+        │
+        ▼
+Determine lag structures (Cross-Correlation Function plots)
+        │
+        ▼
+Create lagged predictors
+        │
+        ▼
+Granger Causality test
+        │
+        ▼
+Check for multicollinearity (Variance Inflation Factor test)
+        │
+        ▼
+Determine ARIMA order
+        │
+        ▼
+Fit model
+        │
+        ▼
+Forecast exogenous variables
+        │
+        ▼
+Forecast dependent variable (food price inflation)
+        │
+        ▼
+Determine confidence intervals
+        │
+        ▼
+Plot forecast against historical values
+        │
+        ▼
+Evaluate model (RMSE, MAE, sMAPE and R-squared)
+        │
+        ▼
+Export predictions
+```
+
+
 ---
 
 ## Deep Learning Model — LSTM
