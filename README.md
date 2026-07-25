@@ -205,6 +205,10 @@ After determing the ARIMA order in the later stages, the model equation used to 
 
 </p>
 
+The terms in the model equation are as follows: Food price inflation, Baltic Dry Index (lag 0 and lag 7), Policy Rate (lag 12), Brent Crude Oil prices (lag 16), seasonality dummy variables (month_2 to month_12), structural break dummy variables for 2009 and 2022, and the error term.
+
+It has been established that the SARIMAX model outperforms the LSTM deep learning model, so the final predictions for SARIMAX are saved as "best_model_predictions.csv" to the "Predictions" folder.
+
 The pipeline for processing and analysing data for the SARIMAX process is as follows:
 
 ```text
