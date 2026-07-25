@@ -187,6 +187,84 @@ The statistical benchmark model captures:
 
 SARIMAX provides an interpretable baseline for evaluating forecasting performance.
 
+The code for the SARIMAX model can be found in the Model_1_Classical Jupyter notebook. Before running this notebook, clean and merge the datasets using the Data Cleaning notebook. Replace the file paths with your own to run the code in your local computer. The food price inflation, Baltic Dry Index, Brent Crude Oil prices and policy rate datasets are cleaned and merged together. However, the Human Capital Project dataset is not merged to these 4 datasets and it is instead merged with external data and analysed separately. After merging the 4 datasets, save the final data as a dataset called "prediction_data" to the Data_Clean folder. After this step, load the "prediction_data.csv" file in the "Model_1_Classical" notebook and start the analysis. Remember to replace the file paths with your own to run the code in your local computer. 
+
+After determing the ARIMA order in the later stages, the model equation used to forecast the fod price inflation is as follows. Even though the final ARIMA order is ARIMA(0, 1, 2), we do not difference the dependent variable as SARIMAX handles differencing internally:
+
+<p align="center">
+
+<img src="Images/ARIMAX_equation.png" width="750">
+
+<br><br>
+
+<img src="Images/error_term.png" width="750">
+
+<br><br>
+
+<img src="Images/Seasonality_Dummy_Term.png" width="750">
+
+</p>
+
+The terms in the model equation are as follows: Food price inflation, Baltic Dry Index (lag 0 and lag 7), Policy Rate (lag 12), Brent Crude Oil prices (lag 16), seasonality dummy variables (month_2 to month_12), structural break dummy variables for 2009 and 2022, and the error term.
+
+It has been established that the SARIMAX model outperforms the LSTM deep learning model, so the final predictions for SARIMAX are saved as "best_model_predictions.csv" to the "Predictions" folder.
+
+The pipeline for processing and analysing data for the SARIMAX process is as follows:
+
+```text
+Data Cleaning and Inspection
+        │
+        ▼
+Exploratory plots (time series and lowess plots)
+        │
+        ▼
+Test for seasonality and structural breaks
+        │
+        ▼
+Creation of seasonality and structural break dummy variable
+        │
+        ▼
+Test for stationarity
+        │
+        ▼
+Pearson correlation test
+        │
+        ▼
+Determine lag structures (Cross-Correlation Function plots)
+        │
+        ▼
+Create lagged predictors
+        │
+        ▼
+Granger Causality test
+        │
+        ▼
+Check for multicollinearity (Variance Inflation Factor test)
+        │
+        ▼
+Determine ARIMA order
+        │
+        ▼
+Fit model
+        │
+        ▼
+Forecast exogenous variables
+        │
+        ▼
+Forecast dependent variable (food price inflation)
+        │
+        ▼
+Determine confidence intervals
+        │
+        ▼
+Plot forecast against historical values
+        │
+        ▼
+Evaluate model (RMSE, MAE, sMAPE and R-squared)
+        │
+        ▼
+Export predictions
+```
 ---
 
 ## Deep Learning Model — LSTM
